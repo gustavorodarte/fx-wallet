@@ -1,0 +1,76 @@
+version: "3"
+
+volumes:
+  db-data:
+    driver: local
+
+services:
+  base: &base
+    hostname: base
+    image: node:functional-boilerplate
+    ports: []
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - .:/home/node/app
+
+  swagger:
+    hostname: swagger
+    image: swaggerapi/swagger-ui
+    ports:
+      - 5003:8080
+    volumes:
+      - ./swagger.json:/home/node/app/swagger.json
+    environment:
+      SWAGGER_JSON: /home/node/app/swagger.json
+
+  db:
+    hostname: db
+    image: mongo
+    volumes:
+      - db-data:/data/db
+
+  app: &app
+    <<: *base
+    hostname: app
+    command: npm run start:dev
+    environment: &env
+      NODE_ENV: development
+      NODE_PATH: "."
+      APOLLO_ROUTE: "graphql"
+      APOLLO_INSTROSPECTION: "true"
+      APOLLO_PLAYGROUND: "true"
+      CORS_EXPOSE_HEADERS: "x-ws-token"
+      CORS_HEADERS: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+      CORS_METHODS: "GET, POST, PUT, OPTIONS, PATCH, DELETE"
+      CORS_ORIGIN: "*"
+      EXPRESS_PORT: 80
+      DB_MONGO_URL: "mongodb://db:27017/application"
+    ports:
+      - "3007:80"
+    depends_on:
+      - db
+
+  debug:
+    <<: *app
+    command: npm run start:debug
+    ports:
+      - "3000:80"
+      - "9229:9229"
+
+  specs:
+    <<: *base
+    command: /bin/ash -c "npm test"
+    environment:
+      <<: *env
+      NODE_ENV: test
+      NODE_PATH: "."
+    depends_on:
+      - db
+
+  lint:
+    <<: *base
+    command: /bin/ash -c "npm run lint"
