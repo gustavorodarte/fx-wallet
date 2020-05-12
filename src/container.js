@@ -32,27 +32,9 @@ const {
 
 // Application layer imports
 const application = require('./app/application');
-const {
-  CreateHero,
-  GetAllHeroes,
-} = require('./app/hero');
-
 // Domain layer imports
-const {
-  EnumsEntity,
-  HeroDomainService,
-  HeroDomainFactory,
-} = require('./domain/hero');
-
 // Infra layer imports
 
-const {
-  database,
-  Hero: HeroModel,
-} = require('./infra/database/models');
-
-
-const MongooseHeroRepository = require('./infra/repositories/hero/MongooseHeroRepository');
 
 module.exports = createContainer()
   // Configuration registration
@@ -78,19 +60,12 @@ module.exports = createContainer()
   // Application layer registrations
   .register({
     app: asFunction(application).singleton(),
-    createHero: asFunction(CreateHero).singleton(),
-    getAllHeroes: asFunction(GetAllHeroes).singleton(),
   })
   // Domain layer registrations
   .register({
-    enumsEntity: asValue(EnumsEntity),
-    heroDomainFactory: asFunction(HeroDomainFactory).singleton(),
-    heroDomainService: asValue(HeroDomainService),
   })
   // Infra layer registrations
   .register({
-    database: asValue(database),
-    HeroModel: asValue(HeroModel),
     logger: asValue(console),
     heroRepository: asFunction(MongooseHeroRepository).singleton(),
   });
