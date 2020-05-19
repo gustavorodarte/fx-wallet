@@ -67,5 +67,4 @@ module.exports = createContainer()
   // Infra layer registrations
   .register({
     logger: asValue(console),
-    heroRepository: asFunction(MongooseHeroRepository).singleton(),
   });
