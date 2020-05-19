@@ -2,6 +2,7 @@ type User {
   cpf: String!
   name: String!
   email: String!
+  password: String!
 }
 
 type AuthPayLoad {

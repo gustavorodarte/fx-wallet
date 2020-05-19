@@ -35,6 +35,7 @@ const application = require('./app/application');
 
 const {
   database,
+  User: UserModel,
 } = require('./infra/database/models');
 
 
@@ -68,5 +69,6 @@ module.exports = createContainer()
   // Infra layer registrations
   .register({
     database: asValue(database),
+    UserModel: asValue(UserModel),
     logger: asValue(console),
   });
