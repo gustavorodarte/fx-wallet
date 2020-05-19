@@ -1,5 +1,5 @@
-const heroMutations = require('./heroMutations');
+const userMutations = require('./userMutations');
 
 module.exports = {
-  heroMutations,
+  userMutations,
 };

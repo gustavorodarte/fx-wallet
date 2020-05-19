@@ -24,16 +24,18 @@ const resolvers = require('./interfaces/http/graphQL/resolvers');
 const server = require('./interfaces/http/server');
 const typeDefs = require('./interfaces/http/graphQL/typeDefs');
 const {
-  heroMutations,
-} = require('./interfaces/http/graphQL/resolvers/mutations');
-const {
-  heroQueries,
+  userQueries,
 } = require('./interfaces/http/graphQL/resolvers/queries');
 
 // Application layer imports
 const application = require('./app/application');
 // Domain layer imports
+
 // Infra layer imports
+
+const {
+  database,
+} = require('./infra/database/models');
 
 
 module.exports = createContainer()
@@ -54,8 +56,7 @@ module.exports = createContainer()
     server: asFunction(server).singleton(),
     typeDefs: asFunction(typeDefs).singleton(),
     v1Router: asFunction(v1Router).singleton(),
-    heroMutations: asFunction(heroMutations).singleton(),
-    heroQueries: asFunction(heroQueries).singleton(),
+    userQueries: asFunction(userQueries).singleton(),
   })
   // Application layer registrations
   .register({
@@ -66,5 +67,6 @@ module.exports = createContainer()
   })
   // Infra layer registrations
   .register({
+    database: asValue(database),
     logger: asValue(console),
   });

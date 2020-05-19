@@ -52,7 +52,7 @@ services:
       CORS_ORIGIN: "*"
       EXPRESS_PORT: 80
       DB_HOST: 'db'
-      DB_DATABASE: exchange
+      DB_DATABASE: fx-wallet
       DB_USER: 'postgres'
       DB_PASSWORD: 'zrp@1234'
     ports:

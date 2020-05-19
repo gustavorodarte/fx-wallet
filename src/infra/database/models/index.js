@@ -1,6 +1,6 @@
 const { ModelsLoader } = require('src/infra/sequelize');
 const Sequelize = require('sequelize');
-const { database: config } = require('config/database');
+const { database: config } = require('config');
 
 
 // eslint-disable-next-line no-console

@@ -1,0 +1,28 @@
+type User {
+  cpf: String!
+  name: String!
+  email: String!
+}
+
+type AuthPayLoad {
+  token: String!
+}
+
+input UserCreateInput {
+  email: String!
+  name: String!
+  password: String!
+}
+input UserLoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  signupUser(data: UserCreateInput!) : AuthPayLoad!
+  loginUser(data: UserLoginInput!): AuthPayLoad!
+}
+
+type Query {
+  users: [User]
+}
