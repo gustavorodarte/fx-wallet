@@ -55,6 +55,7 @@ services:
       DB_DATABASE: fx-wallet
       DB_USER: 'postgres'
       DB_PASSWORD: 'zrp@1234'
+      AUTH_SECRET: 'zrp@1234'
     ports:
       - "3007:80"
     depends_on:

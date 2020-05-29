@@ -13,6 +13,7 @@ function loadDbConfig() {
 
 
 module.exports = {
+  authSecret: process.env.AUTH_SECRET,
   apollo,
   express,
   database: loadDbConfig(),

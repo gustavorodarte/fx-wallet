@@ -5,5 +5,5 @@ module.exports = ({
   server,
   database,
 }) => (
-  connectDatabase(database).then(startServer(server))
+  connectDatabase(database).then(() => startServer(server))
 );

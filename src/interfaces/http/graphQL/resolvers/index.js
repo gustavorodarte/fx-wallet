@@ -1,8 +1,9 @@
 module.exports = ({
   userQueries,
+  userMutations,
 }) => {
   const Query = { ...userQueries };
-  const Mutation = {};
+  const Mutation = { ...userMutations };
 
   return {
     Query,

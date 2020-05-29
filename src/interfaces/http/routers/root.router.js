@@ -6,5 +6,5 @@ module.exports = ({
   v1Router,
 }) => Router()
   .use(corsMiddleware())
-  .use(loggerMiddleware)
+  // .use(loggerMiddleware)
   .use('/v1', v1Router);

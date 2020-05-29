@@ -26,10 +26,29 @@ const typeDefs = require('./interfaces/http/graphQL/typeDefs');
 const {
   userQueries,
 } = require('./interfaces/http/graphQL/resolvers/queries');
+const {
+  userMutations,
+} = require('./interfaces/http/graphQL/resolvers/mutations');
+
 
 // Application layer imports
 const application = require('./app/application');
+const {
+  SignupUser,
+  LoginUser,
+} = require('./app/user');
+
+const {
+  AuthService,
+} = require('./app/services/');
+
+
 // Domain layer imports
+
+const {
+  UserDomainService,
+  UserDomainFactory,
+} = require('./domain/user');
 
 // Infra layer imports
 
@@ -37,6 +56,8 @@ const {
   database,
   User: UserModel,
 } = require('./infra/database/models');
+
+const SequelizeUserRepository = require('./infra/repositories/user/SequelizeUserRepository');
 
 
 module.exports = createContainer()
@@ -58,17 +79,24 @@ module.exports = createContainer()
     typeDefs: asFunction(typeDefs).singleton(),
     v1Router: asFunction(v1Router).singleton(),
     userQueries: asFunction(userQueries).singleton(),
+    userMutations: asFunction(userMutations).singleton(),
   })
   // Application layer registrations
   .register({
     app: asFunction(application).singleton(),
+    signupUser: asFunction(SignupUser).singleton(),
+    loginUser: asFunction(LoginUser).singleton(),
+    authService: asFunction(AuthService).singleton(),
   })
   // Domain layer registrations
   .register({
+    userDomainService: asValue(UserDomainService),
+    userDomainFactory: asValue(UserDomainFactory),
   })
   // Infra layer registrations
   .register({
     database: asValue(database),
     UserModel: asValue(UserModel),
     logger: asValue(console),
+    userRepository: asFunction(SequelizeUserRepository).singleton(),
   });
