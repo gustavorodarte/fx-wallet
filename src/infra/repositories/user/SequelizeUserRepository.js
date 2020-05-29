@@ -8,7 +8,7 @@ const SequelizeUserRepository = ({
     const createUser = fromPromise((data) => UserModel.create(toDatabase(data)));
     return createUser(userData).map(toDomain);
   },
-  getOneByEmail: (email) => {
+  getOneByEmail: ({ email }) => {
     const getUser = fromPromise(() => UserModel.findOne({
       where: {
         email,
