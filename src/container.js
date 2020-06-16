@@ -13,6 +13,7 @@ const {
   corsMiddleware,
   httpOptionsMiddleware,
   loggerMiddleware,
+  authenticationMiddleware,
 } = require('./interfaces/http/middleware');
 const {
   rootRouter,
@@ -73,6 +74,7 @@ module.exports = createContainer()
     healthCheckHandler: asFunction(healthCheckHandler).singleton(),
     httpOptionsMiddleware: asFunction(httpOptionsMiddleware).singleton(),
     loggerMiddleware: asFunction(loggerMiddleware).singleton(),
+    authenticationMiddleware: asFunction(authenticationMiddleware).singleton(),
     resolvers: asFunction(resolvers).singleton(),
     rootRouter: asFunction(rootRouter).singleton(),
     server: asFunction(server).singleton(),
