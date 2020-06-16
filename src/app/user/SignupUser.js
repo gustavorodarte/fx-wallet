@@ -1,19 +1,21 @@
 const Async = require('crocks/Async');
+const {
+  UserDomainFactory,
+  UserDomainService,
+} = require('src/domain/user');
+
+const { createOperationOutput } = require('../utils');
+
 
 const { Resolved } = Async;
 
 module.exports = ({
-  userDomainFactory,
-  userDomainService: {
-    encryptPassword,
-  },
   userRepository,
-  authService: {
-    sigIn,
-  },
+  authService,
 }) => (userData) => (
-  Resolved(userDomainFactory(userData))
-    .chain(encryptPassword)
+  Resolved(UserDomainFactory(userData))
+    .chain(UserDomainService.encryptPassword)
     .chain(userRepository.add)
-    .map(sigIn)
+    .bimap((err) => err, authService.sigIn)
+    .bimap(createOperationOutput, createOperationOutput)
 );

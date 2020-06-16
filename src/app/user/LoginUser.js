@@ -1,33 +1,19 @@
-const Result = require('crocks/Result');
 const pipe = require('crocks/helpers/pipe');
-const either = require('crocks/pointfree/either');
-const compose = require('crocks/helpers/compose');
-const setProp = require('crocks/helpers/setProp');
-const objOf = require('crocks/helpers/objOf');
 
-const { Err } = Result;
+const {
+  UserDomainService,
+} = require('src/domain/user');
 
-const createErr = (message) => (error) => Err({ message, error });
+const { createOperationOutput, createErr } = require('../utils');
 
-const hasError = setProp('hasError');
-
-const buildResult = (key, isError) => compose(hasError(isError), objOf(key));
-
-const createResult = either(
-  buildResult('error', true),
-  buildResult('result', false),
-);
 
 module.exports = ({
-  userDomainService: {
-    validPassword,
-  },
   userRepository,
   authService: {
     sigIn,
   },
 }) => (userData) => {
-  const checkInputPassword = validPassword(userData.password);
+  const checkInputPassword = UserDomainService.validPassword(userData.password);
   return userRepository.getOneByEmail(userData)
-    .bimap(createErr('Unable to Login'), pipe(checkInputPassword, sigIn)).map(createResult);
+    .bimap(createErr('Unable to Login'), pipe(checkInputPassword, sigIn)).map(createOperationOutput);
 };
