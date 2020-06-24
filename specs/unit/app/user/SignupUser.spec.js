@@ -1,3 +1,10 @@
+/* eslint-disable fp/no-mutation */
+/* eslint-disable fp/no-let */
+/* eslint-disable fp/no-unused-expression */
+/* eslint-disable no-undef */
+/* eslint-disable fp/no-nil */
+
+
 const SignupUser = require('src/app/user/SignupUser');
 
 const { Ok } = require('crocks/Result');
@@ -8,7 +15,7 @@ describe('Unit :: App :: User :: SignupUser', () => {
     let signupUser;
     beforeAll(() => {
       const MockUserRepository = {
-        add: user => Resolved(user),
+        add: (user) => Resolved(user),
       };
 
       const MockAuthService = {
@@ -27,9 +34,9 @@ describe('Unit :: App :: User :: SignupUser', () => {
         cpf: '111.526.111-09',
         email: 'dummy@live.com',
         name: 'Dollynho da Silva',
-        password: 'my-password'
+        password: 'my-password',
       };
-      const { result, hasError} = await signupUser(userData).toPromise();
+      const { result, hasError } = await signupUser(userData).toPromise();
 
       expect(hasError).toBeFalsy();
       expect(result).toEqual({
@@ -41,7 +48,7 @@ describe('Unit :: App :: User :: SignupUser', () => {
     let signupUser;
     beforeAll(() => {
       const MockUserRepository = {
-        add: user => Rejected('same error'),
+        add: () => Rejected('same error'),
       };
 
       const MockAuthService = {
@@ -60,7 +67,7 @@ describe('Unit :: App :: User :: SignupUser', () => {
         cpf: '111.526.111-09',
         email: 'dummy@live.com',
         name: 'Dollynho da Silva',
-        password: 'my-password'
+        password: 'my-password',
       };
 
       expect(signupUser(userData).toPromise()).rejects.toThrow({

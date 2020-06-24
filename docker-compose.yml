@@ -56,6 +56,9 @@ services:
       DB_USER: 'postgres'
       DB_PASSWORD: 'zrp@1234'
       AUTH_SECRET: 'zrp@1234'
+      SIMPLE_BASE_URL: 'https://api.demo.frentecorretora.com.br/v1/:443'
+      SIMPLE_LOGIN_EMAIL: 'zrp@zrp.com'
+      SIMPLE_LOGIN_PASSWORD: 'zrp@1234'
     ports:
       - "3007:80"
     depends_on:
