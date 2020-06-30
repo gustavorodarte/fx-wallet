@@ -13,6 +13,7 @@ const {
   corsMiddleware,
   httpOptionsMiddleware,
   loggerMiddleware,
+  authenticationMiddleware,
 } = require('./interfaces/http/middleware');
 const {
   rootRouter,
@@ -24,16 +25,40 @@ const resolvers = require('./interfaces/http/graphQL/resolvers');
 const server = require('./interfaces/http/server');
 const typeDefs = require('./interfaces/http/graphQL/typeDefs');
 const {
-  heroMutations,
-} = require('./interfaces/http/graphQL/resolvers/mutations');
-const {
-  heroQueries,
+  userQueries,
 } = require('./interfaces/http/graphQL/resolvers/queries');
+const {
+  userMutations,
+} = require('./interfaces/http/graphQL/resolvers/mutations');
+
 
 // Application layer imports
 const application = require('./app/application');
+const {
+  SignupUser,
+  LoginUser,
+} = require('./app/user');
+
+const {
+  AuthService,
+} = require('./app/services/');
+
+
 // Domain layer imports
+
+const {
+  UserDomainService,
+  UserDomainFactory,
+} = require('./domain/user');
+
 // Infra layer imports
+
+const {
+  database,
+  User: UserModel,
+} = require('./infra/database/models');
+
+const SequelizeUserRepository = require('./infra/repositories/user/SequelizeUserRepository');
 
 
 module.exports = createContainer()
@@ -49,23 +74,31 @@ module.exports = createContainer()
     healthCheckHandler: asFunction(healthCheckHandler).singleton(),
     httpOptionsMiddleware: asFunction(httpOptionsMiddleware).singleton(),
     loggerMiddleware: asFunction(loggerMiddleware).singleton(),
+    authenticationMiddleware: asFunction(authenticationMiddleware).singleton(),
     resolvers: asFunction(resolvers).singleton(),
     rootRouter: asFunction(rootRouter).singleton(),
     server: asFunction(server).singleton(),
     typeDefs: asFunction(typeDefs).singleton(),
     v1Router: asFunction(v1Router).singleton(),
-    heroMutations: asFunction(heroMutations).singleton(),
-    heroQueries: asFunction(heroQueries).singleton(),
+    userQueries: asFunction(userQueries).singleton(),
+    userMutations: asFunction(userMutations).singleton(),
   })
   // Application layer registrations
   .register({
     app: asFunction(application).singleton(),
+    signupUser: asFunction(SignupUser).singleton(),
+    loginUser: asFunction(LoginUser).singleton(),
+    authService: asFunction(AuthService).singleton(),
   })
   // Domain layer registrations
   .register({
+    userDomainService: asValue(UserDomainService),
+    userDomainFactory: asValue(UserDomainFactory),
   })
   // Infra layer registrations
   .register({
+    database: asValue(database),
+    UserModel: asValue(UserModel),
     logger: asValue(console),
-    heroRepository: asFunction(MongooseHeroRepository).singleton(),
+    userRepository: asFunction(SequelizeUserRepository).singleton(),
   });

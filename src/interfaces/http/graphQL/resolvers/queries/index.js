@@ -1,5 +1,5 @@
-const heroQueries = require('./heroQuerys');
+const userQueries = require('./userQueries');
 
 module.exports = {
-  heroQueries,
+  userQueries,
 };

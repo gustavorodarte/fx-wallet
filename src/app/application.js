@@ -1,11 +1,9 @@
 const startServer = (server) => server.start();
-const connectMongoDb = (db, { mongoDb: config }) => db
-  .connect(encodeURI(config.url), { useNewUrlParser: true });
+const connectDatabase = (db) => db.authenticate();
 
 module.exports = ({
-  config,
   server,
   database,
 }) => (
-  connectMongoDb(database, config).then(startServer(server))
+  connectDatabase(database).then(() => startServer(server))
 );

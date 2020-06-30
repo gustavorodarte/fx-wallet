@@ -37,6 +37,8 @@ module.exports = {
     'fp/no-throw': 'error',
     'fp/no-unused-expression': 'error',
     'fp/no-valueof-field': 'error',
-    'no-var': 'error'
+    'import/no-unresolved': 0,
+    'no-var': 'error',
+    'no-nested-ternary': 0,
   },
 };
