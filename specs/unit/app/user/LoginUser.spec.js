@@ -1,3 +1,9 @@
+/* eslint-disable fp/no-mutation */
+/* eslint-disable fp/no-let */
+/* eslint-disable fp/no-unused-expression */
+/* eslint-disable no-undef */
+/* eslint-disable fp/no-nil */
+
 const LoginUser = require('src/app/user/LoginUser');
 
 const { Ok } = require('crocks/Result');
@@ -8,11 +14,11 @@ describe('Unit :: App :: User :: LoginUser', () => {
     let loginUser;
     beforeAll(() => {
       const MockUserRepository = {
-        getOneByEmail: user => Resolved({
+        getOneByEmail: () => Resolved({
           cpf: '111.526.111-09',
           email: 'dummy@live.com',
           name: 'Dollynho da Silva',
-          password: '$2b$04$c1tagXRGqFETmp/bALOsv.JYZ5kJeLvUO9kU8yFBhRM/XSD3C37a.'
+          password: '$2b$04$c1tagXRGqFETmp/bALOsv.JYZ5kJeLvUO9kU8yFBhRM/XSD3C37a.',
         }),
       };
 
@@ -30,9 +36,9 @@ describe('Unit :: App :: User :: LoginUser', () => {
     test('should return a valid jwt token', async () => {
       const userData = {
         email: 'dummy@live.com',
-        password: 'my-password'
+        password: 'my-password',
       };
-      const { result, hasError} = await loginUser(userData).toPromise();
+      const { result, hasError } = await loginUser(userData).toPromise();
 
       expect(hasError).toBeFalsy();
       expect(result).toEqual({
@@ -44,7 +50,7 @@ describe('Unit :: App :: User :: LoginUser', () => {
     let loginUser;
     beforeAll(() => {
       const MockUserRepository = {
-        getOneByEmail: user => Rejected('same error'),
+        getOneByEmail: () => Rejected('same error'),
       };
 
       const MockAuthService = {
@@ -63,7 +69,7 @@ describe('Unit :: App :: User :: LoginUser', () => {
         cpf: '111.526.111-09',
         email: 'dummy@live.com',
         name: 'Dollynho da Silva',
-        password: 'my-password'
+        password: 'my-password',
       };
 
       expect(loginUser(userData).toPromise()).rejects.toThrow({

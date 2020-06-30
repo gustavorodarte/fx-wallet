@@ -3,7 +3,7 @@ const path = require('path');
 const apollo = require('./apollo');
 const express = require('./express');
 const database = require('./database');
-
+const simple = require('./simple');
 
 function loadDbConfig() {
   const ENV = process.env.NODE_ENV || 'development';
@@ -17,4 +17,5 @@ module.exports = {
   apollo,
   express,
   database: loadDbConfig(),
+  simple,
 };

@@ -1,0 +1,77 @@
+{
+  "id": "9aa26c09265a73aa7b30e7173b6f8358a099450f",
+  "reverse": true,
+  "purposeCode": "IR003",
+  "currency": {
+    "countryFlagUrl": "https://s3.amazonaws.com/frente-exchanges/flags/united-states.svg",
+    "code": "USD",
+    "name": "Dólar Americano",
+    "coverageRatePercentage": 89,
+    "offer": 184,
+    "offerUSD": {
+      "value": 1840000,
+      "divisor": 10000
+    },
+    "parityFromUSD": {
+      "value": 10000,
+      "divisor": 10000
+    },
+    "parityToUSD": {
+      "value": 10000,
+      "divisor": 10000
+    },
+    "spreadPercentage": 2.52,
+    "maxToSell": 65320,
+    "minToSell": 184,
+    "multiples": [
+      20,
+      50,
+      100
+    ],
+    "commercialExchangeRate": {
+      "value": 38360,
+      "divisor": 10000
+    },
+    "levelingRate": {
+      "value": 72500,
+      "divisor": 10000
+    }
+  },
+  "tax": {
+    "iof": {
+      "percentage": 1.1,
+      "total": {
+        "value": 1504,
+        "divisor": 100
+      }
+    }
+  },
+  "price": {
+    "withoutTax": {
+      "value": 74327,
+      "divisor": 10000
+    },
+    "withTax": {
+      "value": 75145,
+      "divisor": 10000
+    }
+  },
+  "total": {
+    "withoutTax": {
+      "value": 136762,
+      "divisor": 100
+    },
+    "withTax": {
+      "value": 138267,
+      "divisor": 100
+    }
+  },
+  "createdAt": "2019-11-06T14:18:57.572Z",
+  "expiresAt": "2019-11-06T14:28:57.000Z",
+  "timeToLive": 600,
+  "merchantId": "WL-FRENTE-SP",
+  "rounding": {
+    "method": "MINIMUM",
+    "rounded": true
+  }
+}
