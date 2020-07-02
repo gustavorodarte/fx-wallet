@@ -1,1 +1,4 @@
 # import Query.*, Mutation.* from "user.graphql"
+# import Query.* from "quotation.graphql"
+
+scalar Date

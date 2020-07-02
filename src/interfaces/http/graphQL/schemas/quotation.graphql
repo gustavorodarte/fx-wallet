@@ -1,0 +1,59 @@
+type NumericValue {
+  value: Int,
+  divisor: Int,
+}
+
+type Rounding {
+  method: String,
+  rounded: Boolean,
+}
+
+type Currency {
+  countryFlagUrl: String!,
+  code: String,
+  name: String,
+  coverageRatePercentage: String,
+  offer: Int,
+  offerUSD: NumericValue,
+  spreadPercentage: Int,
+  maxToSell: Int,
+  minToSell: Int,
+  multiples: [Int],
+  commercialExchangeRate: NumericValue,
+}
+
+type Tax {
+  iof: Iof,
+}
+
+type Price { 
+  withoutTax: NumericValue,
+  withTax: NumericValue,
+}
+
+type Iof {
+  percentage: Int,
+  total: NumericValue,
+}
+
+type Total {
+  withoutTax: NumericValue,
+  withTax: NumericValue,
+}
+
+type Quotation {
+  id: String!
+  purposeCode: String,
+  currency: Currency,
+  tax: Tax,
+  price: Price,
+  total: Total,
+  createdAt: Date,
+  expiresAt: Date,
+  timeToLive: Int,
+  merchantId: String,
+}
+
+type Query {
+  quotation: Quotation
+}

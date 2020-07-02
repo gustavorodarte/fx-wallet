@@ -1,6 +1,7 @@
 module.exports = ({
   userQueries,
   userMutations,
+  graphQLDate,
 }) => {
   const Query = { ...userQueries };
   const Mutation = { ...userMutations };
@@ -8,5 +9,6 @@ module.exports = ({
   return {
     Query,
     Mutation,
+    Date: graphQLDate,
   };
 };

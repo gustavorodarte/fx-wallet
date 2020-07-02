@@ -27,10 +27,14 @@ const server = require('./interfaces/http/server');
 const typeDefs = require('./interfaces/http/graphQL/typeDefs');
 const {
   userQueries,
+  quotationQueries,
 } = require('./interfaces/http/graphQL/resolvers/queries');
 const {
   userMutations,
 } = require('./interfaces/http/graphQL/resolvers/mutations');
+const {
+  graphQLDate,
+} = require('./interfaces/http/graphQL/resolvers/types');
 
 
 // Application layer imports
@@ -82,8 +86,10 @@ module.exports = createContainer()
     typeDefs: asFunction(typeDefs).singleton(),
     v1Router: asFunction(v1Router).singleton(),
     userQueries: asFunction(userQueries).singleton(),
+    quotationQueries: asFunction(quotationQueries).singleton(),
     userMutations: asFunction(userMutations).singleton(),
     apolloErrorHandler: asFunction(apolloErrorHandler).singleton(),
+    graphQLDate: asValue(graphQLDate),
   })
   // Application layer registrations
   .register({

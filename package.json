@@ -62,6 +62,7 @@
     "eslint-plugin-import": "^2.20.1",
     "factory-bot": "^6.1.4",
     "faker": "^4.1.0",
+    "graphql-tools": "^6.0.11",
     "husky": "^3.1.0",
     "jest": "^26.0.1",
     "nock": "^12.0.3",
