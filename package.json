@@ -55,27 +55,19 @@
     "superstruct": "^0.8.3"
   },
   "devDependencies": {
+    "@fnando/cpf": "^1.0.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-import": "^2.20.1",
+    "factory-bot": "^6.1.4",
+    "faker": "^4.1.0",
     "husky": "^3.1.0",
     "jest": "^26.0.1",
     "nock": "^12.0.3",
-    "nodemon": "^2.0.3"
-  },
-  "jest": {
-    "coverageReporters": [
-      "text-summary",
-      "html"
-    ],
-    "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/app/application.js",
-      "!src/interfaces/http/server.js",
-      "!src/interfaces/http/routers/*"
-    ]
+    "nodemon": "^2.0.3",
+    "supertest": "^4.0.2",
+    "supertest-as-promised": "^4.0.2"
   },
   "husky": {
     "hooks": {

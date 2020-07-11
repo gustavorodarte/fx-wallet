@@ -22,6 +22,7 @@ const {
 const apollo = require('./interfaces/http/graphQL/apollo');
 const context = require('./interfaces/http/graphQL/context');
 const resolvers = require('./interfaces/http/graphQL/resolvers');
+const apolloErrorHandler = require('./interfaces/http/graphQL/errorHandler');
 const server = require('./interfaces/http/server');
 const typeDefs = require('./interfaces/http/graphQL/typeDefs');
 const {
@@ -82,6 +83,7 @@ module.exports = createContainer()
     v1Router: asFunction(v1Router).singleton(),
     userQueries: asFunction(userQueries).singleton(),
     userMutations: asFunction(userMutations).singleton(),
+    apolloErrorHandler: asFunction(apolloErrorHandler).singleton(),
   })
   // Application layer registrations
   .register({

@@ -1,4 +1,5 @@
 const Async = require('crocks/Async');
+const { Err } = require('crocks/Result');
 const {
   UserDomainFactory,
   UserDomainService,
@@ -17,5 +18,5 @@ module.exports = ({
     .chain(UserDomainService.encryptPassword)
     .chain(userRepository.add)
     .bimap((err) => err, authService.sigIn)
-    .bimap(createOperationOutput, createOperationOutput)
+    .bimap((err) => createOperationOutput(Err(err)), (result) => createOperationOutput(result))
 );
