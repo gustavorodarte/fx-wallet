@@ -11,10 +11,11 @@ module.exports = ({
     },
   } = config;
 
+  const app = express.disable('x-powered-by').use(rootRouter);
+
   return {
-    start: () => express
-      .disable('x-powered-by')
-      .use(rootRouter)
+    express: app,
+    start: () => app
       .listen(port, () => logger.info(`[PID ${process.pid}] Listening at port ${port}`)),
   };
 };

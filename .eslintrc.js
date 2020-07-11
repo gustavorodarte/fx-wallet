@@ -40,5 +40,6 @@ module.exports = {
     'import/no-unresolved': 0,
     'no-var': 'error',
     'no-nested-ternary': 0,
+    'import/no-extraneous-dependencies': 0,
   },
 };
