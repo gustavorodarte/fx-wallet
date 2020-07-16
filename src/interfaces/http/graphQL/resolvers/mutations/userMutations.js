@@ -3,10 +3,10 @@ module.exports = ({
   signupUser,
   apolloErrorHandler,
 }) => ({
-  signupUser: (_, { data: userData }) => signupUser(userData)
-    .fork(apolloErrorHandler, ({ result }) => result),
-  loginUser: async (_, { data: userData }) => {
-    const { result } = await loginUser(userData).toPromise();
-    return result;
-  },
+  signupUser: (_, { data: userData }) => signupUser(userData).toPromise()
+    .catch(apolloErrorHandler)
+    .then(({ result }) => result),
+  loginUser: (_, { data: userData }) => loginUser(userData).toPromise()
+    .catch(apolloErrorHandler)
+    .then(({ result }) => result),
 });

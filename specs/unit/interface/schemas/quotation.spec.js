@@ -3,7 +3,7 @@
 /* eslint-disable fp/no-nil */
 const {
   makeExecutableSchema,
-  addMocksToSchema,
+  addMockFunctionsToSchema,
   mockServer,
 } = require('graphql-tools');
 
@@ -18,7 +18,7 @@ const testCases = [...queries, ...mutations];
 describe('Quotation', () => {
   const schemaPath = '../../../../src/interfaces/http/graphQL/schemas/schema.graphql';
   const typeDefs = importSchema(path.join(__dirname, schemaPath));
-  const mockSchema = addMocksToSchema({
+  const mockSchema = addMockFunctionsToSchema({
     schema: makeExecutableSchema({ typeDefs }),
     mocks: {
       String: () => 'test',

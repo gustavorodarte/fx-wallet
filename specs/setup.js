@@ -6,8 +6,8 @@ const container = require('src/container');
 
 container.resolve('database');
 
-// const cleanDatabase = require('specs/support/cleanDatabase');
+const cleanDatabase = require('specs/support/cleanDatabase');
 
 beforeEach(async () => {
-  // await cleanDatabase();
+  await cleanDatabase();
 });

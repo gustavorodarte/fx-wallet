@@ -35,7 +35,7 @@ describe('API: GraphQL :: Mutations :: User :: SingUp', () => {
       });
     });
   });
-  describe.only('When user already exists', () => {
+  describe('When user already exists', () => {
     let user;
     beforeEach(async () => {
       // eslint-disable-next-line fp/no-mutation
@@ -47,7 +47,7 @@ describe('API: GraphQL :: Mutations :: User :: SingUp', () => {
         signupUser(data: {
           email: "${user.email}",
           password: "${user.password}",
-          name: "${user.password}",
+          name: "${user.password}", 
           cpf: "${user.cpf}",
         }){
           token
