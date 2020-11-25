@@ -12,5 +12,4 @@ const createOutput = either(
   buildResult('result', false),
 );
 
-
 module.exports = createOutput;

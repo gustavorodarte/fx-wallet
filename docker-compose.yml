@@ -39,7 +39,7 @@ services:
   app: &app
     <<: *base
     hostname: app
-    command: npm run start:dev
+    command: npm run start
     environment: &env
       NODE_ENV: development
       NODE_PATH: "."

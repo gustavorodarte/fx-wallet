@@ -7,7 +7,6 @@ const {
 
 const { createOperationOutput } = require('../utils');
 
-
 const { Resolved } = Async;
 
 module.exports = ({

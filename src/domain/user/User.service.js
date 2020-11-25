@@ -20,7 +20,6 @@ const validPassword = (inputPassword, user) => {
     : Err('Unable to Login');
 };
 
-
 module.exports = {
   encryptPassword,
   validPassword: curry(validPassword),
